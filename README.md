@@ -1,15 +1,3 @@
-# SQl_questions_ankit_bansal
-# SQl_questions_ankit_bansal
-/*Here are the given datasets below:
--There are two tables named as source and target.
--SQL interview problem asked in PWC. We will solve it using 2 methods. Here is the script :
-create table source(id int, name varchar(5));
-create table target(id int, name varchar(5));
-insert into source values(1,'A'),(2,'B'),(3,'C'),(4,'D');
-insert into target values(1,'A'),(2,'B'),(4,'X'),(5,'F');
---output:
-(id,comment)-(3,'new in source'),(5,'new in target'),(4,'mismatch')*/
-"SOLUTION-1"
 select 
 	coalesce(s.id,t.id) as id,
     case 
