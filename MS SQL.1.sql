@@ -1,3 +1,4 @@
+--solution-1 using full outer join
 select 
 	coalesce(s.id,t.id) as id,
     case 
@@ -12,19 +13,33 @@ on
 	s.id=t.id 
 where 
 	s.name!=t.name or s.name is null or t.name is null;
-    
-    with cte as 
-    (SELECT *,'source' as tab_name FROM SOURCE 
-    UNION ALL 
-    SELECT *,'target' as tab_name FROM TARGET)
-    select id,case when min(tab_name)='source' then 'new in source' 
-    when max(tab_name)='target' then 'new in target' 
-    when max(tab_name)!=min(tab_name) then 'mismatch' 
-    end as comment
+--solution -2 using union all    
+with cte as 
+(
+	SELECT
+		*,'source' as tab_name
+	FROM 
+		SOURCE 
+    	UNION ALL 
+    	SELECT 
+		*,'target' as tab_name 
+	FROM 
+	TARGET
+)
+    select 
+	id,
+	case 
+	when min(tab_name)='source' then 'new in source' 
+    	when max(tab_name)='target' then 'new in target' 
+    	when max(tab_name)!=min(tab_name) then 'mismatch' 
+    	end as comment
     --min(name) as n1,max(name) as n2,min(tab_name) as t1,max(tab_name) as t2,count(*) as count
-    from cte
-    group by id 
-    having COUNT(*)=1 or (count(*)=2 and min(name)!=max(name))
+    from 
+	cte
+    group by
+	id 
+    having 
+	COUNT(*)=1 or (count(*)=2 and min(name)!=max(name))
     
     
     
