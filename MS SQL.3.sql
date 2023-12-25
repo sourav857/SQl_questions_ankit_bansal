@@ -22,13 +22,14 @@ cte as (
  	case when sender>receiver then sender else receiver end as s2
 	from subscriber 
 	)
-select sms_date,s1,s2,sum(sms_no) 
+select 
+	sms_date,s1,s2,sum(sms_no) 
 as 
-messages_sent 
+	messages_sent 
 from 
-cte 
+	cte 
 group BY 
-sms_date,s1,s2
+	sms_date,s1,s2
 
 
 
