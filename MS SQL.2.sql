@@ -1,3 +1,5 @@
+
+/*
 create table products
 (
 product_id varchar(20) ,
@@ -12,7 +14,7 @@ budget int
 );
 
 insert into customer_budget values (100,400),(200,800),(300,1500);
-
+*/
 
 
 
