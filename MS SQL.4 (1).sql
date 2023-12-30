@@ -59,8 +59,8 @@ with cte as
     where 
     	positions='junior'
   	and 
-    caps <50000-
-    			(select sum(salary) from cte1) union all 
+    caps <=50000-
+    			(select coalesce(sum(salary),0) from cte1) union all 
     select 
     *
     from 
